@@ -18,6 +18,7 @@ O objetivo principal é simplificar o processo de encontrar e organizar moradias
 - [Guilherme Henrique Barbosa de Souza Lima](https://github.com/Castlus)
 - [Lucas Henrique de Andrade Silva](https://github.com/Lucasenrique-s)
 - [Luigi Mateo e Silva](https://github.com/memelon220)
+- [Pablo Roldão Pereira Santos](https://github.com/pablo-roldao)
 
 ## :round_pushpin: Objetivos
 - Facilitar a busca por moradias estudantis
