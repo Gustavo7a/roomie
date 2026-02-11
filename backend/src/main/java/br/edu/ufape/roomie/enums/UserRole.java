@@ -1,4 +1,4 @@
-package br.edu.ufape.roomie.model;
+package br.edu.ufape.roomie.enums;
 
 public enum UserRole {
     ADMIN("admin"),
