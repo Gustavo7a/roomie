@@ -12,3 +12,9 @@ export interface LoginResponse {
   user?: User;
   role: UserRole;
 }
+
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { LoginResponse, User, UserRole } from './user.interface';
+import { LoginResponse, User, UserRole, RegisterData } from './user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class Auth {
     );
   }
 
-  register(data: {name: string, email: string, password: string}): Observable<User> {
+  register(data: RegisterData): Observable<User> {
     const payload = {
       ...data,
       role: 'USER'

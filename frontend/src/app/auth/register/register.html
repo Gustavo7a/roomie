@@ -1,1 +1,47 @@
-<h1>Register</h1>
+<div class="register-container">
+  <h2>Crie sua conta no Roomie</h2>
+  
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="name">Nome Completo</label>
+      <input id="name" type="text" formControlName="name" placeholder="Ex: João Silva">
+      <div class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['required']">
+        Nome é obrigatório.
+      </div>
+      <div class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['minlength']">
+        O nome deve ter pelo menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" formControlName="email" placeholder="Ex: joao@email.com">
+      <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
+        Digite um e-mail válido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password">
+      <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']">
+        A senha deve ter no mínimo 6 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword">
+      <div class="error" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']">
+        As senhas não coincidem.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Cadastrar</button>
+
+    <p class="login-link">
+      Já tem uma conta? <a routerLink="/auth/login">Faça Login</a>
+    </p>
+  </form>
+</div>
