@@ -29,14 +29,10 @@ O objetivo principal é simplificar o processo de encontrar e organizar moradias
 
 ## Tecnologias Utilizadas
 ### Frontend
-- Angular
-- TypeScript
-- HTML
-- CSS
+[![My Skills](https://skillicons.dev/icons?i=angular,typescript,html,css)](https://skillicons.dev)
 
 ### Backend
-- Java
-- Spring Boot
+[![My Skills](https://skillicons.dev/icons?i=java,spring,postgres,docker)](https://skillicons.dev)
 
 ## Status do Projeto
 Em desenvolvimento.  

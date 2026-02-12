@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f6f5f7; 
+  font-family: 'Raleway', sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: #0D83D7; 
+  font-weight: 800;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.back-link {
+  color: #0D83D7; 
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

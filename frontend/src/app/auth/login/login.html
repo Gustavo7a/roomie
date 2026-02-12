@@ -1,0 +1,140 @@
+<div class="container" [class.right-panel-active]="isRightPanelActive">
+
+  <div class="form-container sign-up-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <h1>Crie sua conta</h1>
+
+      <div class="input-group">
+        <label for="name">Nome:</label>
+        <input type="text" placeholder="ex: João da Silva" formControlName="name" />
+        <div class="error-message" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['required']">
+          Nome é obrigatório.
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['minlength']">
+          Mínimo de 3 caracteres.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Gênero:</label>
+
+        <div class="gender-options">
+          <input type="radio" id="gender-male" value="MASCULINO" formControlName="gender" name="gender">
+          <label for="gender-male" class="gender-btn">Masculino</label>
+
+          <input type="radio" id="gender-female" value="FEMININO" formControlName="gender" name="gender">
+          <label for="gender-female" class="gender-btn">Feminino</label>
+
+          <input type="radio" id="gender-other" value="OUTRO" formControlName="gender" name="gender">
+          <label for="gender-other" class="gender-btn">Outro</label>
+        </div>
+
+        <div class="error-message" *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.errors?.['required']">
+          Selecione uma opção.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" placeholder="000.000.000-00" formControlName="cpf" maxlength="14"/>
+
+        <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['required']">
+          CPF é obrigatório.
+        </div>
+
+        <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['pattern']">
+          CPF inválido. Use pontos ou apenas números.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="email">E-mail:</label>
+        <input type="email" placeholder="ex: seu@email.com" formControlName="email" />
+        <div class="error-message" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
+          Email inválido.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="phone">Telefone:</label>
+        <input type="tel" placeholder="ex: (11) 99999-9999" formControlName="phone" />
+        <div class="error-message" *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.errors?.['required']">
+          Telefone é obrigatório.
+        </div>
+        <div class="error-message" *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.errors?.['pattern']">
+          Formato inválido. Use: (XX) 9XXXX-XXXX
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Senha:</label>
+        <input [type]="showRegisterPass ? 'text' : 'password'" placeholder="********" formControlName="password" />
+        <button type="button" class="eye-btn" (click)="toggleRegisterPass()">
+          <svg *ngIf="!showRegisterPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg *ngIf="showRegisterPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B0082" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07-2.3 2.3"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+        </button>
+        <div class="error-message" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']">
+          Mínimo de 6 caracteres.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirmar Senha:</label>
+        <input [type]="showConfirmPass ? 'text' : 'password'" placeholder="********" formControlName="confirmPassword" />
+        <button type="button" class="eye-btn" (click)="toggleConfirmPass()">
+           <svg *ngIf="!showConfirmPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+           <svg *ngIf="showConfirmPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B0082" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07-2.3 2.3"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+        </button>
+        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']">
+          As senhas não conferem.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid">Cadastrar</button>
+    </form>
+  </div>
+
+  <div class="form-container sign-in-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <h1>Login</h1>
+
+      <div class="input-group">
+        <label for="email">E-mail:</label>
+        <input type="email" placeholder="ex: seu@email.com" formControlName="email" />
+        <div class="error-message" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+          Digite um email válido.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Senha:</label>
+        <input [type]="showLoginPass ? 'text' : 'password'" placeholder="********" formControlName="password" />
+        <button type="button" class="eye-btn" (click)="toggleLoginPass()">
+           <svg *ngIf="!showLoginPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+           <svg *ngIf="showLoginPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B0082" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07-2.3 2.3"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+        </button>
+        <div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          Senha muito curta.
+        </div>
+      </div>
+
+      <a href="#">Esqueceu sua senha?</a>
+      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Bem-vindo de volta!</h1>
+        <p>Para se conectar, faça login com suas informações pessoais</p>
+        <button class="ghost" (click)="togglePanel()">Entrar</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Não tem uma conta?</h1>
+        <p>Crie uma e comece a usar agora mesmo!</p>
+        <button class="ghost" (click)="togglePanel()">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>
