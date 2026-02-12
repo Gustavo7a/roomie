@@ -2,6 +2,7 @@ package br.edu.ufape.roomie.service;
 
 import br.edu.ufape.roomie.dto.UserDTO;
 import br.edu.ufape.roomie.dto.UserResponseDTO;
+import br.edu.ufape.roomie.enums.UserRole;
 import br.edu.ufape.roomie.model.User;
 import br.edu.ufape.roomie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,14 @@ public class AuthService implements UserDetailsService {
         }
 
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
-        User newUser = new User(userDTO.getName(), userDTO.getEmail(), userDTO.getCpf(), encryptedPassword, userDTO.getGender(), userDTO.getRole());
+
+        UserRole role = userDTO.getRole();
+        if (role == null) {
+            role = UserRole.USER;
+        }
+
+        User newUser = new User(userDTO.getName(), userDTO.getEmail(), userDTO.getCpf(), encryptedPassword, userDTO.getGender(), role);
+
         if (userDTO.getPhones() != null){
             for(String numero : userDTO.getPhones()){
                 newUser.addTelefone(numero);

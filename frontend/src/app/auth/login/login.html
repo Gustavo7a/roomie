@@ -1,9 +1,9 @@
 <div class="container" [class.right-panel-active]="isRightPanelActive">
-  
+
   <div class="form-container sign-up-container">
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <h1>Crie sua conta</h1>
-      
+
       <div class="input-group">
         <label for="name">Nome:</label>
         <input type="text" placeholder="ex: João da Silva" formControlName="name" />
@@ -17,15 +17,15 @@
 
       <div class="input-group">
         <label>Gênero:</label>
-        
+
         <div class="gender-options">
-          <input type="radio" id="gender-male" value="MALE" formControlName="gender" name="gender">
+          <input type="radio" id="gender-male" value="MASCULINO" formControlName="gender" name="gender">
           <label for="gender-male" class="gender-btn">Masculino</label>
 
-          <input type="radio" id="gender-female" value="FEMALE" formControlName="gender" name="gender">
+          <input type="radio" id="gender-female" value="FEMININO" formControlName="gender" name="gender">
           <label for="gender-female" class="gender-btn">Feminino</label>
 
-          <input type="radio" id="gender-other" value="OTHER" formControlName="gender" name="gender">
+          <input type="radio" id="gender-other" value="OUTRO" formControlName="gender" name="gender">
           <label for="gender-other" class="gender-btn">Outro</label>
         </div>
 
@@ -37,11 +37,11 @@
       <div class="input-group">
         <label for="cpf">CPF:</label>
         <input type="text" placeholder="000.000.000-00" formControlName="cpf" maxlength="14"/>
-        
+
         <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['required']">
           CPF é obrigatório.
         </div>
-        
+
         <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['pattern']">
           CPF inválido. Use pontos ou apenas números.
         </div>
@@ -97,7 +97,7 @@
   <div class="form-container sign-in-container">
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <h1>Login</h1>
-      
+
       <div class="input-group">
         <label for="email">E-mail:</label>
         <input type="email" placeholder="ex: seu@email.com" formControlName="email" />
@@ -117,7 +117,7 @@
           Senha muito curta.
         </div>
       </div>
-      
+
       <a href="#">Esqueceu sua senha?</a>
       <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
     </form>
