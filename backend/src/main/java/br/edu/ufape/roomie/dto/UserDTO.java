@@ -9,6 +9,7 @@ import java.util.List;
 public class UserDTO {
     private String name;
     private String email;
+    private String cpf;
     private String password;
     private UserGender gender;
     private List<String> phones;

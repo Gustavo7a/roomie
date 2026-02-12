@@ -28,6 +28,9 @@ public class User implements UserDetails {
 
     @Column(name = "email", unique = true)
     private String email;
+    
+    @Column(name = "cpf", unique = true)
+    private String cpf;
 
     @Column(name = "senha")
     private String password;
@@ -43,9 +46,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones = new ArrayList<>();
 
-    public User(String name, String email, String password, UserGender gender, UserRole role) {
+    public User(String name, String email, String cpf, String password, UserGender gender, UserRole role) {
         this.name = name;
         this.email = email;
+        this.cpf = cpf;
         this.password = password;
         this.gender = gender;
         this.role = role;

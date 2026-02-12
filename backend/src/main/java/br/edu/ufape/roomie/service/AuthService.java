@@ -39,7 +39,7 @@ public class AuthService implements UserDetailsService {
         }
 
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
-        User newUser = new User(userDTO.getName(), userDTO.getEmail(), encryptedPassword, userDTO.getGender(), userDTO.getRole());
+        User newUser = new User(userDTO.getName(), userDTO.getEmail(), userDTO.getCpf(), encryptedPassword, userDTO.getGender(), userDTO.getRole());
         if (userDTO.getPhones() != null){
             for(String numero : userDTO.getPhones()){
                 newUser.addTelefone(numero);
