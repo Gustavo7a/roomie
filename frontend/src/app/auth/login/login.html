@@ -35,6 +35,19 @@
       </div>
 
       <div class="input-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" placeholder="000.000.000-00" formControlName="cpf" maxlength="14"/>
+        
+        <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['required']">
+          CPF é obrigatório.
+        </div>
+        
+        <div class="error-message" *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.errors?.['pattern']">
+          CPF inválido. Use pontos ou apenas números.
+        </div>
+      </div>
+
+      <div class="input-group">
         <label for="email">E-mail:</label>
         <input type="email" placeholder="ex: seu@email.com" formControlName="email" />
         <div class="error-message" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">

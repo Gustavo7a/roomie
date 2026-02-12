@@ -32,9 +32,14 @@ export class Login {
   registerForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     gender: ['', [Validators.required]],
-    phone: ['', [Validators.required, Validators.pattern(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/)]],
+    phone: ['', [Validators.required, 
+      Validators.pattern(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    cpf: ['', [
+      Validators.required, 
+      Validators.pattern(/^(\d{3}\.\d{3}\.\d{3}\-\d{2}|\d{11})$/)
+    ]],
     confirmPassword: ['', [Validators.required]]
   }, { validators: this.passwordMatchValidator });
 
@@ -67,6 +72,7 @@ export class Login {
         const cleanPhone = rawValues.phone.replace(/\D/g, '');
         const ddd = cleanPhone.substring(0, 2);
         const numero = cleanPhone.substring(2);
+        const cleanCpf = rawValues.cpf.replace(/\D/g, '');
 
         const dadosParaEnviar = {
         name: rawValues.name,
