@@ -1,4 +1,4 @@
-# roomie
+# Roomie
 ## Plataforma de Gerenciamento de Moradias Estudantis
 
 ## Sobre o Projeto
@@ -33,6 +33,77 @@ O objetivo principal é simplificar o processo de encontrar e organizar moradias
 
 ### Backend
 [![My Skills](https://skillicons.dev/icons?i=java,spring,postgres,docker)](https://skillicons.dev)
+
+## Como Rodar o Projeto
+
+Este guia contém as instruções completas para configurar e rodar o ambiente de desenvolvimento localmente usando Docker.
+
+### Pré-requisitos
+
+Certifique-se de ter as seguintes ferramentas instaladas:
+
+* [Git](https://git-scm.com/)
+* [Docker](https://www.docker.com/) & Docker Compose
+
+> **Nota:** Não é necessário instalar Java, Node.js ou PostgreSQL na sua máquina para *rodar* o sistema. O Docker cuida de tudo.
+
+---
+
+### 1. Clonando o Repositório
+
+Este projeto utiliza **Git Submodules** para gerenciar o esquema do banco de dados. A clonagem deve ser feita de forma recursiva:
+
+```bash
+# Clone o repositório principal baixando também o submodule do banco
+git clone --recurse-submodules https://github.com/MocoGroup/roomie
+
+# Entre na pasta do projeto
+cd roomie
+
+```
+
+#### Esqueceu da flag recursiva?
+Se a pasta `database` estiver vazia, execute:
+```bash
+git submodule update --init --recursive
+```
+### 2. Configurando Variáveis de Ambiente (.env)
+O sistema é configurável através de um arquivo `.env` na raiz.
+1. Crie um arquivo chamado `.env` na **raiz** do projeto (mesmo local do `docker-compose.yml`).
+2. Copie o conteúdo abaixo e ajuste conforme necessário:
+
+| Parâmetro | Valor |
+|:---|---:|
+|DB_USER|`your-user`|
+|DB_PASSWORD|`your-password`|
+|DB_NAME| `db-name`|
+|DB_PORT|`db_port`|
+|DB_HOST|`localhost`|
+|BACKEND_PORT|`8080`|
+|FRONTEND_PORT|`4200`|
+
+***É importante que o `BACKEND_PORT` e `FRONTEND_PORT` sejam os mesmos da tabela acima***
+
+### 3. Executando a Aplicação
+Com o Docker rodando e o `.env` configurado, execute:
+
+```bash
+docker-compose up -d
+```
+em seguida:
+```bash
+docker-compose up --build
+```
+Isso irá:
+1. Subir o banco de dados ***PostgreSQL***.
+2. Compilar e iniciar o ***Backend*** (Spring Boot).
+3. Compilar o ***Frontend*** (Angular) e serví-lo via Nginx.
+
+| Serviço | URL | Descrição |
+|:---|---| ---:|
+|Frontend|`http://localhost:4200`|Aplicação Web|
+|Backend API|`http://localhost:8080`|Endpoints da API|
+|Banco de Dados|`localhost`|Host para conexão via DBeaver/PgAdmin (Use a porta que você definiu no .env)|
 
 ## Status do Projeto
 Em desenvolvimento.  
