@@ -1,5 +1,6 @@
 package br.edu.ufape.roomie.model;
 
+import br.edu.ufape.roomie.enums.PropertyStatus;
 import br.edu.ufape.roomie.enums.PropertyType;
 import br.edu.ufape.roomie.enums.UserGender;
 import jakarta.persistence.*;
@@ -41,6 +42,10 @@ public class Property {
 
     @Column(name = "vagas_disponiveis", nullable = false)
     private Integer availableVacancies;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private PropertyStatus status;
 
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     private Address address;
