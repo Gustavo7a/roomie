@@ -68,7 +68,7 @@ class PropertyControllerTest {
         validDto.setDescription("Excelente quarto para estudantes.");
         validDto.setType(PropertyType.HOUSE);
         validDto.setPrice(450.00);
-        validDto.setGender(UserGender.OUTRO);
+        validDto.setGender(UserGender.OTHER);
         validDto.setAcceptAnimals(true);
         validDto.setAvailableVacancies(2);
         validDto.setAddress(addressDTO);
