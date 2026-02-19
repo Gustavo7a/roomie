@@ -48,7 +48,7 @@ public class Property {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private PropertyStatus status;
+    private PropertyStatus status = PropertyStatus.DRAFT;
 
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     private Address address;

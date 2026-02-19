@@ -63,7 +63,7 @@ class PropertyServiceTest {
         validDto.setDescription("Próximo à UFAPE, mobiliado.");
         validDto.setType(PropertyType.HOUSE);
         validDto.setPrice(500.0);
-        validDto.setGender(UserGender.MASCULINO);
+        validDto.setGender(UserGender.MALE);
         validDto.setAcceptAnimals(false);
         validDto.setAvailableVacancies(1);
         validDto.setAddress(addressDto);
