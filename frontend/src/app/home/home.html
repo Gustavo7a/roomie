@@ -1,8 +1,84 @@
-<div class="home-container">
-  <h1>Bem-vindo ao Roomie!</h1>
-  <p>Você está logado no sistema.</p>
+<ng-container *ngIf="!hasSearched">
+  <div class="hero-container">
 
-  <button (click)="onLogout()" class="logout-btn">
-    Fazer logout
-  </button>
-</div>
+    <header class="topbar-blue">
+      <h2 class="logo-text">Roomie</h2>
+      <button class="profile-btn" (click)="goToProfile()">Meu Perfil</button>
+    </header>
+
+    <div class="hero-content">
+      <h1>Encontre seu novo lar.</h1>
+      <p>Repúblicas, quartos e apartamentos para dividir com a sua vibe.</p>
+
+      <div class="big-search-box">
+        <input type="text" [formControl]="initialSearch" placeholder="Para qual cidade ou bairro você vai?"
+          (keyup.enter)="onInitialSearch()" />
+        <button class="btn-big-search" (click)="onInitialSearch()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="hasSearched">
+  <div class="dashboard-container">
+
+    <header class="topbar-blue">
+      <h2 class="logo-text" (click)="goBackHome()" style="cursor: pointer;" title="Voltar ao Início">Roomie</h2>
+      <button class="profile-btn" (click)="goToProfile()">Meu Perfil</button>
+    </header>
+
+    <div class="search-section" [formGroup]="filterForm">
+      <div class="search-bar">
+        <input type="text" formControlName="location" placeholder="Buscar cidade ou bairro..."
+          (keyup.enter)="onFilter()" />
+        <button class="btn-search" (click)="onFilter()">Buscar</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <aside class="sidebar">
+        <h3>Filtros</h3>
+        <form [formGroup]="filterForm" (ngSubmit)="onFilter()">
+
+          <div class="filter-group price-group">
+            <div>
+              <label>Preço Mín.</label>
+              <input type="number" formControlName="minPrice" placeholder="R$ 0" />
+            </div>
+            <div>
+              <label>Preço Máx.</label>
+              <input type="number" formControlName="maxPrice" placeholder="R$ 2000" />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Tipo de Imóvel</label>
+            <select formControlName="propertyType">
+              <option value="">Todos os tipos</option>
+              <option value="HOUSE">Casa</option>
+              <option value="APARTMENT">Apartamento</option>
+              <option value="ROOM">Quarto Individual</option>
+              <option value="REPUBLIC">República</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-filter">Aplicar Filtros</button>
+        </form>
+      </aside>
+
+      <section class="results-area">
+        <div class="results-header">
+          <h2>Resultados da Busca</h2>
+          <p>Mostrando imóveis para: <strong>{{ appliedLocation || 'Qualquer lugar' }}</strong></p>
+        </div>
+
+        <div class="grid-placeholder">
+          <div class="card-skeleton">Espaço para o Card</div>
+          <div class="card-skeleton">Espaço para o Card</div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</ng-container>
