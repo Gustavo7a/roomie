@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Auth } from '../auth/auth';
 import { Router, ActivatedRoute } from '@angular/router'; 
@@ -16,14 +16,14 @@ import { PropertyList } from '../components/property-list/property-list';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit, OnDestroy {
+export class Home implements OnInit {
   private auth = inject(Auth);
   private router = inject(Router);
   private route = inject(ActivatedRoute); 
   private fb = inject(FormBuilder);
   
   private propertyService = inject(PropertyService);
-  private pollInterval: any;
+  private cdr = inject(ChangeDetectorRef);
 
   hasSearched: boolean = false; 
   appliedLocation: string = ''; 
@@ -43,7 +43,7 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (Object.keys(params).length > 0 && !this.hasSearched) {
+      if (Object.keys(params).length > 0) {
         this.hasSearched = true;
         this.filterForm.patchValue(params, { emitEvent: false });
         this.appliedLocation = params['location'] || '';
@@ -51,15 +51,6 @@ export class Home implements OnInit, OnDestroy {
       }
     });
 
-    this.pollInterval = setInterval(() => {
-      if (this.hasSearched) {
-        this.onFilter(true);
-      }
-    }, 3000);
-  }
-
-  ngOnDestroy() {
-    clearInterval(this.pollInterval);
   }
 
   onInitialSearch() {
@@ -88,10 +79,12 @@ export class Home implements OnInit, OnDestroy {
       next: (resultados: any) => {
         this.properties = resultados;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Erro ao buscar imóveis:', err);
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }
