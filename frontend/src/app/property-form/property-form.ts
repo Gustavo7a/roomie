@@ -19,6 +19,9 @@ export class PropertyFormComponent implements OnInit {
   showImageUpload: boolean = false;
   isSubmitting: boolean = false;
 
+  selectedFiles: File[] = [];
+  imagePreviews: string[] = [];
+
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private auth = inject(Auth);
@@ -50,6 +53,27 @@ export class PropertyFormComponent implements OnInit {
     this.showImageUpload = !this.showImageUpload;
   }
 
+  onFileSelected(event: any): void {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        this.selectedFiles.push(file);
+
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.imagePreviews.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  removeImage(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.imagePreviews.splice(index, 1);
+  }
+
   onSubmit(): void {
     if (this.propertyForm.valid) {
       this.isSubmitting = true;
@@ -59,8 +83,9 @@ export class PropertyFormComponent implements OnInit {
         type: 'application/json'
       }));
 
-      // TO-DO: Adicionar fotos aqui iterando sobre um array de ficheiros:
-      // formData.append('photos', ficheiroUpload);
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        formData.append('photos', this.selectedFiles[i]);
+      }
 
       this.propertyService.createProperty(formData).subscribe({
         next: (response) => {

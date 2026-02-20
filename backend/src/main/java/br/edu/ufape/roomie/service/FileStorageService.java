@@ -28,26 +28,20 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file) {
-        // Pega o nome original do arquivo e limpa o caminho
         String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            // Verifica se o nome do arquivo contém caracteres inválidos
             if (originalFileName.contains("..")) {
                 throw new RuntimeException("Desculpe! O nome do arquivo contém um caminho inválido " + originalFileName);
             }
 
-            // Gera um nome único usando UUID para evitar sobrescrever imagens com o mesmo nome (ex: foto.jpg)
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             String newFileName = UUID.randomUUID().toString() + fileExtension;
 
-            // Resolve o caminho final onde o arquivo será salvo
             Path targetLocation = this.fileStorageLocation.resolve(newFileName);
 
-            // Copia o arquivo para o diretório alvo (Substituindo se já existir)
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            // Retorna o nome do arquivo gerado para salvarmos no banco de dados
             return newFileName;
 
         } catch (IOException ex) {
