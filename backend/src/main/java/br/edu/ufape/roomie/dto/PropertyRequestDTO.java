@@ -5,6 +5,7 @@ import br.edu.ufape.roomie.enums.UserGender;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.math.BigDecimal;
 
 @Data
 public class PropertyRequestDTO {
@@ -19,7 +20,7 @@ public class PropertyRequestDTO {
 
     @NotNull(message = "O preço é obrigatório")
     @Positive(message = "O preço deve ser um valor positivo")
-    private Double price;
+    private BigDecimal price;
 
     @NotNull(message = "Defina o gênero preferencial")
     private UserGender gender;

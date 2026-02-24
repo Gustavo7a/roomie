@@ -22,6 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import java.math.BigDecimal;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ class PropertyServiceTest {
         validDto.setTitle("Quarto Universitário");
         validDto.setDescription("Próximo à UFAPE, mobiliado.");
         validDto.setType(PropertyType.HOUSE);
-        validDto.setPrice(500.0);
+        validDto.setPrice(new BigDecimal("500.00"));
         validDto.setGender(UserGender.MALE);
         validDto.setAcceptAnimals(false);
         validDto.setAvailableVacancies(1);

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +32,11 @@ public class Property {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo")
+    @Column(name = "tipo", nullable = false)
     private PropertyType type;
 
-    @Column(nullable = false, name = "preco")
-    private Double price;
+    @Column(nullable = false, name = "preco", precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genero_moradores", nullable = false)

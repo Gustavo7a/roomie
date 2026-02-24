@@ -19,6 +19,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import java.math.BigDecimal;
 
 import java.nio.charset.StandardCharsets;
 
@@ -67,7 +68,7 @@ class PropertyControllerTest {
         validDto.setTitle("Quarto bem localizado próximo à UFAPE");
         validDto.setDescription("Excelente quarto para estudantes.");
         validDto.setType(PropertyType.HOUSE);
-        validDto.setPrice(450.00);
+        validDto.setPrice(new BigDecimal("450.00"));
         validDto.setGender(UserGender.OTHER);
         validDto.setAcceptAnimals(true);
         validDto.setAvailableVacancies(2);
