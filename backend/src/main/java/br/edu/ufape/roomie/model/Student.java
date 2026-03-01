@@ -19,4 +19,7 @@ public class Student extends User {
     @Column(name = "instituicao", nullable = false, length = 100)
     private String institution;
 
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Habit habit;
+
 }

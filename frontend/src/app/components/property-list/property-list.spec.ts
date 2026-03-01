@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PropertyList } from './property-list';
+import {PropertyList} from './property-list';
 
 describe('PropertyList', () => {
   let component: PropertyList;
@@ -10,7 +10,7 @@ describe('PropertyList', () => {
     await TestBed.configureTestingModule({
       imports: [PropertyList]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PropertyList);
     component = fixture.componentInstance;

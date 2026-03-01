@@ -19,15 +19,15 @@ public class StudentService {
     private UserRepository userRepository;
 
     @Transactional
-    public void promoteUserToStudent(Long userId, String major, String institution){
+    public void promoteUserToStudent(Long userId, String major, String institution) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
 
         studentRepository.promoteUserToStudent(userId, major, institution);
     }
 
     @Transactional
-    public void updateStudentProfile(Long userId, String major, String institution){
+    public void updateStudentProfile(Long userId, String major, String institution) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!"));
 

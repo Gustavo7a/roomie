@@ -41,6 +41,7 @@ public class PropertyService {
         property.setPrice(dto.getPrice());
         property.setGender(dto.getGender());
         property.setAcceptAnimals(dto.getAcceptAnimals());
+        property.setHasGarage(dto.getHasGarage());
         property.setAvailableVacancies(dto.getAvailableVacancies());
         property.setStatus(PropertyStatus.DRAFT);
 
@@ -83,6 +84,78 @@ public class PropertyService {
         }
 
         property.setStatus(PropertyStatus.ACTIVE);
+        return propertyRepository.save(property);
+    }
+
+    @Transactional
+    public void deleteProperty(Long propertyId) {
+        User user = getAuthenticatedUser();
+
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Imóvel não encontrado."));
+
+        if (!property.getOwner().getId().equals(user.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para excluir este imóvel.");
+        }
+
+        propertyRepository.delete(property);
+    }
+
+    @Transactional
+    public Property setPropertyToDraft(Long propertyId) {
+        User user = getAuthenticatedUser();
+
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Imóvel não encontrado."));
+
+        if (!property.getOwner().getId().equals(user.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para editar este imóvel.");
+        }
+
+        property.setStatus(PropertyStatus.DRAFT);
+        return propertyRepository.save(property);
+    }
+
+    @Transactional
+    public Property updateProperty(Long propertyId, PropertyRequestDTO dto, List<MultipartFile> photos) {
+        User user = getAuthenticatedUser();
+
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Imóvel não encontrado."));
+
+        if (!property.getOwner().getId().equals(user.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para editar este imóvel.");
+        }
+
+        property.setTitle(dto.getTitle());
+        property.setDescription(dto.getDescription());
+        property.setType(dto.getType());
+        property.setPrice(dto.getPrice());
+        property.setGender(dto.getGender());
+        property.setAcceptAnimals(dto.getAcceptAnimals());
+        property.setHasGarage(dto.getHasGarage());
+        property.setAvailableVacancies(dto.getAvailableVacancies());
+        property.setStatus(PropertyStatus.DRAFT);
+
+        Address address = property.getAddress();
+        address.setStreet(dto.getAddress().getStreet());
+        address.setDistrict(dto.getAddress().getDistrict());
+        address.setNumber(dto.getAddress().getNumber());
+        address.setCity(dto.getAddress().getCity());
+        address.setState(dto.getAddress().getState());
+        address.setCep(dto.getAddress().getCep());
+
+        if (photos != null && !photos.isEmpty()) {
+            property.getPhotos().clear();
+            for (MultipartFile photo : photos) {
+                String fileName = fileStorageService.storeFile(photo);
+                PropertyPhoto propertyPhoto = new PropertyPhoto();
+                propertyPhoto.setPath("/images/" + fileName);
+                propertyPhoto.setProperty(property);
+                property.getPhotos().add(propertyPhoto);
+            }
+        }
+
         return propertyRepository.save(property);
     }
 

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PropertyCard } from './property-card';
+import {PropertyCard} from './property-card';
 
 describe('PropertyCard', () => {
   let component: PropertyCard;
@@ -10,10 +10,16 @@ describe('PropertyCard', () => {
     await TestBed.configureTestingModule({
       imports: [PropertyCard]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PropertyCard);
     component = fixture.componentInstance;
+    component.property = {
+      id: 1,
+      title: 'Test Property',
+      price: 500,
+      photos: [],
+    } as any;
     await fixture.whenStable();
   });
 
