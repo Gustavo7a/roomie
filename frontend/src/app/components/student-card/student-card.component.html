@@ -1,0 +1,29 @@
+<div class="recommendation-card">
+
+  <div class="card-top">
+    <div class="avatar">{{ initial }}</div>
+
+    <div class="card-info">
+      <h3>{{ recommendation.name }}</h3>
+      <span class="card-major">{{ recommendation.major }}</span>
+    </div>
+
+    <div class="compatibility-badge" [style.background]="compatibilityColor">
+      {{ recommendation.compatibilityPercentage }}%
+    </div>
+  </div>
+
+  <div *ngIf="recommendation.commonInterests.length > 0" class="tags-container">
+    <span *ngFor="let tag of recommendation.commonInterests" class="interest-tag">
+      {{ tag }}
+    </span>
+  </div>
+
+  <div class="card-actions">
+    <button class="btn-ignore" (click)="onIgnore($event)" title="Ignorar recomendação">
+      <span class="material-icons" aria-hidden="true">visibility_off</span>
+      Ignorar
+    </button>
+  </div>
+
+</div>

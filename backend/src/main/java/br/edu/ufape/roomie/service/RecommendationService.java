@@ -45,7 +45,7 @@ public class RecommendationService {
         // 1. Comparar Horário de Estudo (Peso 25)
         if (userHabit.getStudySchedule() != null && userHabit.getStudySchedule() == targetHabit.getStudySchedule()) {
             score += 25;
-            commonTags.add("Estuda de " + userHabit.getStudySchedule().name());
+            commonTags.add("Estuda de " + userHabit.getStudySchedule().getLabel());
         }
 
         // 2. Comparar Estilo de Vida (Peso 25)

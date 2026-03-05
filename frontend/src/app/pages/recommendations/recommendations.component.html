@@ -55,29 +55,11 @@
 
   <!-- Cards de recomendação -->
   <div *ngIf="!isLoading && recommendations.length > 0" class="recommendations-grid">
-    <div *ngFor="let rec of recommendations" class="recommendation-card">
-      <div class="card-top">
-        <div class="avatar">{{ rec.name.charAt(0).toUpperCase() }}</div>
-        <div class="card-info">
-          <h3>{{ rec.name }}</h3>
-          <span class="card-major">{{ rec.major }}</span>
-        </div>
-        <div class="compatibility-badge" [style.background]="getCompatibilityColor(rec.compatibilityPercentage)">
-          {{ rec.compatibilityPercentage }}%
-        </div>
-      </div>
-
-      <div *ngIf="rec.commonInterests.length > 0" class="tags-container">
-        <span *ngFor="let tag of rec.commonInterests" class="interest-tag">{{ tag }}</span>
-      </div>
-
-      <div class="card-actions">
-        <button class="btn-ignore" (click)="ignoreRecommendation(rec, $event)" title="Ignorar recomendação">
-          <span class="material-icons" aria-hidden="true">visibility_off</span>
-          Ignorar
-        </button>
-      </div>
-    </div>
+    <app-student-card
+      *ngFor="let rec of recommendations"
+      [recommendation]="rec"
+      (ignore)="ignoreRecommendation($event)">
+    </app-student-card>
   </div>
 
   <!-- Toast de desfazer -->

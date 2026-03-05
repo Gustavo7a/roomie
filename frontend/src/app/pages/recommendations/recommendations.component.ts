@@ -4,11 +4,12 @@ import {Router} from '@angular/router';
 import {RecommendationService} from '../../services/recommendation.service';
 import {RoommateRecommendation} from '../../models/roommate-recommendation';
 import {HeaderComponent} from '../../components/shared/header/header.component';
+import {StudentCardComponent} from '../../components/student-card/student-card.component';
 
 @Component({
   selector: 'app-recommendations',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, StudentCardComponent],
   templateUrl: './recommendations.component.html',
   styleUrl: './recommendations.component.css',
 })
@@ -51,8 +52,7 @@ export class RecommendationsComponent implements OnInit {
     });
   }
 
-  ignoreRecommendation(rec: RoommateRecommendation, event: MouseEvent): void {
-    event.stopPropagation();
+  ignoreRecommendation(rec: RoommateRecommendation): void {
     this.recommendationService.ignoreRecommendation(rec.studentId);
     this.recommendations = this.recommendations.filter(r => r.studentId !== rec.studentId);
     this.lastIgnored = rec;
@@ -83,21 +83,11 @@ export class RecommendationsComponent implements OnInit {
     return this.recommendationService.ignoredCount;
   }
 
-  getCompatibilityColor(percentage: number): string {
-    if (percentage >= 75) return '#16a34a';
-    if (percentage >= 50) return '#d97706';
-    return '#6b7280';
-  }
-
   goBack(): void {
     this.router.navigate(['/home']);
   }
 
   goToHabits(): void {
     this.router.navigate(['/habits']);
-  }
-
-  viewStudentProfile(studentId: number): void {
-    // Futuro: navegar para perfil do estudante
   }
 }
