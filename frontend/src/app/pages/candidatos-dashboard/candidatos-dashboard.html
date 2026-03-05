@@ -164,10 +164,17 @@
                       (click)="updateCandidateStatus(interest.interestId, InterestStatus.REJECTED, group.property.idImovel)">
                       <span class="material-icons">close</span>
                     </button>
-                    <a
+                    <button
                       class="btn-contact"
-                      [href]="'mailto:' + interest.studentName"
-                      title="Entrar em contato">
+                      title="Iniciar chat"
+                      (click)="startChatWithStudent(interest.studentId, group.property.idImovel)">
+                      <span class="material-icons">chat</span>
+                    </button>
+                    <a
+                      *ngIf="interest.studentEmail"
+                      class="btn-contact"
+                      [href]="'mailto:' + interest.studentEmail"
+                      title="Enviar e-mail">
                       <span class="material-icons">mail</span>
                     </a>
                   </td>

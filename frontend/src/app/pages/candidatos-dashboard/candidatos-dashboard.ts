@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 import { PropertyService } from '../../services/propertyService';
 import { InterestService } from '../../services/interest.service';
+import { ChatService } from '../../services/chat.service';
+import { ChatWidgetService } from '../../services/chat-widget.service';
 import { PropertyDetailView } from '../../models/property-detail-view';
 import { InterestSummary } from '../../models/interest-summary';
 import { InterestStatus } from '../../models/interest-status.enum';
@@ -41,6 +43,8 @@ export class CandidatosDashboardComponent implements OnInit {
   constructor(
     private readonly propertyService: PropertyService,
     private readonly interestService: InterestService,
+    private readonly chatService: ChatService,
+    private readonly chatWidgetService: ChatWidgetService,
     private readonly cdr: ChangeDetectorRef,
     private readonly toast: ToastService,
   ) {}
@@ -176,6 +180,18 @@ export class CandidatosDashboardComponent implements OnInit {
       error: (err: any) => {
         this.toast.error(err?.message ?? 'Não foi possível atualizar o status do candidato.');
         this.cdr.detectChanges();
+      }
+    });
+  }
+
+  /** Inicia ou abre o chat com o estudante interessado */
+  startChatWithStudent(studentId: number, propertyId: number): void {
+    this.chatService.startChat(studentId, propertyId).subscribe({
+      next: (chat) => {
+        this.chatWidgetService.openChat(chat.id);
+      },
+      error: () => {
+        this.toast.error('Não foi possível iniciar o chat. Tente novamente.');
       }
     });
   }

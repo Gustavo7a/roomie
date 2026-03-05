@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -32,12 +33,12 @@ public class PropertyController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Property> store(
+    public ResponseEntity<Map<String, Long>> store(
             @Valid @RequestPart("data") PropertyRequestDTO dto,
             @RequestPart(value = "photos", required = false) List<MultipartFile> photos
     ) {
         Property createdProperty = propertyService.createProperty(dto, photos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProperty);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("id", createdProperty.getId()));
     }
 
     @GetMapping
@@ -99,14 +100,13 @@ public class PropertyController {
         }
 
         if (property.getStatus() == PropertyStatus.ACTIVE) {
-            return ResponseEntity.badRequest()
-                    .body("Imóvel já está publicado.");
+            return ResponseEntity.badRequest().body("Imóvel já está publicado.");
         }
 
         property.setStatus(PropertyStatus.ACTIVE);
         propertyRepository.save(property);
 
-        return ResponseEntity.ok(property);
+        return ResponseEntity.ok(Map.of("id", property.getId(), "status", "ACTIVE"));
     }
 
     @DeleteMapping("/{id}")
@@ -123,20 +123,20 @@ public class PropertyController {
     public ResponseEntity<?> setPropertyToDraft(@PathVariable Long id, Authentication authentication) {
         try {
             Property property = propertyService.setPropertyToDraft(id);
-            return ResponseEntity.ok(property);
+            return ResponseEntity.ok(Map.of("id", property.getId(), "status", "DRAFT"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Property> updateProperty(
+    public ResponseEntity<Map<String, Long>> updateProperty(
             @PathVariable Long id,
             @Valid @RequestPart("data") PropertyRequestDTO dto,
             @RequestPart(value = "photos", required = false) List<MultipartFile> photos
     ) {
         Property updated = propertyService.updateProperty(id, dto, photos);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(Map.of("id", updated.getId()));
     }
 
 }

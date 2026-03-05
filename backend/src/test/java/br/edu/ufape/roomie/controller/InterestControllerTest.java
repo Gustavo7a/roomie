@@ -163,7 +163,7 @@ class InterestControllerTest {
         );
 
         InterestSummaryDTO summaryDTO = new InterestSummaryDTO(
-                1L, 2L, "Estudante Teste", "Ciência da Computação", "UFAPE", InterestStatus.PENDING, LocalDateTime.now()
+                1L, 2L, "Estudante Teste", "estudante@teste.com", "Ciência da Computação", "UFAPE", InterestStatus.PENDING, LocalDateTime.now()
         );
         List<InterestSummaryDTO> lista = List.of(summaryDTO);
 

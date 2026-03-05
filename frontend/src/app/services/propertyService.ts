@@ -21,8 +21,8 @@ export class PropertyService {
     return this.http.get<Property[]>(this.apiUrl);
   }
 
-  createProperty(propertyData: any): Observable<any> {
-    return this.http.post(this.apiUrl, propertyData, {responseType: 'text' as 'json'});
+  createProperty(propertyData: any): Observable<{ id: number }> {
+    return this.http.post<{ id: number }>(this.apiUrl, propertyData);
   }
 
   getMyProperties(): Observable<PropertyDetailView[]> {

@@ -14,6 +14,12 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 
     List<Chat> findByStudent(Student student);
 
+    /** Busca chats onde o usuário é o proprietário usando ID */
+    List<Chat> findByUserId(Long userId);
+
+    /** Busca chats onde o usuário é o estudante interessado usando ID */
+    List<Chat> findByStudentId(Long studentId);
+
     Optional<Chat> findByStudentIdAndUserIdAndPropertyId(Long studentId, Long userId, Long propertyId);
 }
 

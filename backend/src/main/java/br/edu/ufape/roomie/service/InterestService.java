@@ -53,6 +53,7 @@ public class InterestService {
                 interest.getId(),
                 interest.getStudent().getId(),
                 interest.getStudent().getName(),
+                interest.getStudent().getEmail(),
                 interest.getStudent().getMajor(),
                 interest.getStudent().getInstitution(),
                 interest.getStatus(),

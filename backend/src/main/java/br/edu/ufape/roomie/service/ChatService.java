@@ -54,16 +54,24 @@ public class ChatService {
 
     /**
      * Retorna todos os chats do usuário logado (proprietário ou estudante).
+     * Busca por ID puro em ambos os papéis.
      */
     @Transactional(readOnly = true)
     public List<ChatResponseDTO> getChatsForUser(User user) {
-        List<Chat> chats;
-        if (user instanceof Student student) {
-            chats = chatRepository.findByStudent(student);
-        } else {
-            chats = chatRepository.findByUser(user);
-        }
-        return chats.stream().map(chat -> toDTO(chat, user)).collect(Collectors.toList());
+        // Busca chats onde o usuário é proprietário
+        List<Chat> asOwner = chatRepository.findByUserId(user.getId());
+        // Busca chats onde o usuário é estudante interessado
+        List<Chat> asStudent = chatRepository.findByStudentId(user.getId());
+
+        // Combina e remove duplicatas (caso um usuário seja dono e também tenha demonstrado interesse)
+        java.util.Set<Long> seen = new java.util.LinkedHashSet<>();
+        java.util.List<Chat> allChats = new java.util.ArrayList<>();
+        for (Chat c : asOwner)   { if (seen.add(c.getId())) allChats.add(c); }
+        for (Chat c : asStudent) { if (seen.add(c.getId())) allChats.add(c); }
+
+        return allChats.stream()
+                .map(chat -> toDTO(chat, user))
+                .collect(Collectors.toList());
     }
 
     /**

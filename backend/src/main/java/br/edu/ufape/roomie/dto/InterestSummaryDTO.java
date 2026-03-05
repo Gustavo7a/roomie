@@ -14,6 +14,7 @@ public class InterestSummaryDTO {
     private Long interestId;
     private Long studentId;
     private String studentName;
+    private String studentEmail;
     private String major;
     private String institution;
     private InterestStatus status;
