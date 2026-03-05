@@ -66,7 +66,8 @@ class RecommendationControllerTest {
         );
 
         RoommateRecommendationDTO recomendacao = new RoommateRecommendationDTO(
-                2L, "Maria", "BCC", 85, List.of("Estuda de MORNING", "fitness")
+                2L, "Maria", "BCC", 85, List.of("Estuda de MORNING", "fitness"),
+                "manhã", List.of("fitness"), List.of("introvertido"), List.of("organizado")
         );
         List<RoommateRecommendationDTO> listaRecomendacoes = List.of(recomendacao);
 

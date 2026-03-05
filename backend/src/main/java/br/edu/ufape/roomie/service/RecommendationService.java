@@ -90,7 +90,11 @@ public class RecommendationService {
                 targetStudent.getName(),
                 targetStudent.getMajor(),
                 finalPercentage,
-                commonTags
+                commonTags,
+                targetHabit.getStudySchedule() != null ? targetHabit.getStudySchedule().getLabel() : null,
+                targetHabit.getHobbies().stream().map(h -> h.getHobby().toLowerCase()).toList(),
+                targetHabit.getLifeStyles().stream().map(l -> l.getStyle().toLowerCase()).toList(),
+                targetHabit.getCleaningPrefs().stream().map(c -> c.getPref().toLowerCase()).toList()
         );
     }
 

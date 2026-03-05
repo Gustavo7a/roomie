@@ -2,6 +2,7 @@
 
 <div class="recommendations-page">
 
+  <!-- Page Header -->
   <div class="page-header">
     <button class="btn-back" (click)="goBack()">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -14,9 +15,20 @@
       <span class="material-icons" aria-hidden="true">people</span>
       Recomendações de Colegas
     </h1>
+
+    <button
+      class="btn-filter"
+      [class.btn-filter--active]="filterPanelOpen || hasActiveFilters"
+      (click)="toggleFilterPanel()"
+      aria-label="Abrir painel de filtros"
+      *ngIf="!isLoading && !needsHabits && !errorMessage">
+      <span class="material-icons">tune</span>
+      Filtrar
+      <span *ngIf="hasActiveFilters" class="filter-badge" aria-label="Filtros ativos"></span>
+    </button>
   </div>
 
-  <!-- Botão para restaurar ignorados -->
+  <!-- Restoring banner -->
   <div *ngIf="ignoredCount > 0" class="ignored-banner">
     <span>{{ ignoredCount }} recomendação(ões) oculta(s)</span>
     <button class="btn-restore" (click)="clearAllIgnored()">Restaurar todas</button>
@@ -46,20 +58,66 @@
     <button class="btn-explore" (click)="goBack()">Voltar ao início</button>
   </div>
 
-  <!-- Lista vazia -->
-  <div *ngIf="!isLoading && !needsHabits && !errorMessage && recommendations.length === 0" class="empty-state">
-    <span class="material-icons empty-icon" aria-hidden="true">group_off</span>
-    <p>Nenhuma recomendação encontrada no momento.</p>
-    <button class="btn-explore" (click)="goBack()">Explorar imóveis</button>
-  </div>
+  <!-- Conteúdo principal: painel + cards -->
+  <div
+    *ngIf="!isLoading && !needsHabits && !errorMessage"
+    class="content-layout"
+    [class.content-layout--with-panel]="filterPanelOpen">
 
-  <!-- Cards de recomendação -->
-  <div *ngIf="!isLoading && recommendations.length > 0" class="recommendations-grid">
-    <app-student-card
-      *ngFor="let rec of recommendations"
-      [recommendation]="rec"
-      (ignore)="ignoreRecommendation($event)">
-    </app-student-card>
+    <!-- Painel de Filtros -->
+    <aside *ngIf="filterPanelOpen" class="filter-sidebar" aria-label="Painel de filtros">
+      <app-filter-panel
+        [availableMajors]="availableMajors"
+        [availableStudySchedules]="availableStudySchedules"
+        [availableHobbies]="availableHobbies"
+        [availableLifeStyles]="availableLifeStyles"
+        [availableCleaningPrefs]="availableCleaningPrefs"
+        [filters]="filterState"
+        (filtersChange)="onFiltersChange($event)"
+        (close)="filterPanelOpen = false">
+      </app-filter-panel>
+    </aside>
+
+    <!-- Área de resultados -->
+    <section class="results-area">
+
+      <!-- Contador de resultados -->
+      <div *ngIf="allRecommendations.length > 0" class="results-count">
+        <span>
+          <strong>{{ filteredRecommendations.length }}</strong>
+          de {{ allRecommendations.length }} colega(s)
+        </span>
+        <button *ngIf="hasActiveFilters" class="btn-clear-inline" (click)="filterState = {majorSearch: '', minCompatibility: 0, studySchedules: [], selectedHobbies: [], selectedLifeStyles: [], selectedCleaningPrefs: []}">
+          Limpar filtros
+        </button>
+      </div>
+
+      <!-- Lista vazia total -->
+      <div *ngIf="allRecommendations.length === 0" class="empty-state">
+        <span class="material-icons empty-icon" aria-hidden="true">group_off</span>
+        <p>Nenhuma recomendação encontrada no momento.</p>
+        <button class="btn-explore" (click)="goBack()">Explorar imóveis</button>
+      </div>
+
+      <!-- Lista vazia por filtro -->
+      <div *ngIf="allRecommendations.length > 0 && filteredRecommendations.length === 0" class="empty-state">
+        <span class="material-icons empty-icon" aria-hidden="true">search_off</span>
+        <p>Nenhum colega corresponde aos filtros aplicados.</p>
+        <button class="btn-explore" (click)="filterState = {majorSearch: '', minCompatibility: 0, studySchedules: [], selectedHobbies: [], selectedLifeStyles: [], selectedCleaningPrefs: []}">
+          Limpar filtros
+        </button>
+      </div>
+
+      <!-- Cards de recomendação -->
+      <div *ngIf="filteredRecommendations.length > 0" class="recommendations-grid">
+        <app-student-card
+          *ngFor="let rec of filteredRecommendations"
+          [recommendation]="rec"
+          (ignore)="ignoreRecommendation($event)">
+        </app-student-card>
+      </div>
+
+    </section>
   </div>
 
   <!-- Toast de desfazer -->

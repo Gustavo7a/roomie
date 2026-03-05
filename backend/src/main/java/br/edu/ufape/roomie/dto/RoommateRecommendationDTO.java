@@ -15,4 +15,8 @@ public class RoommateRecommendationDTO {
     private String major;
     private Integer compatibilityPercentage;
     private List<String> commonInterests;
+    private String studySchedule;
+    private List<String> hobbies;
+    private List<String> lifeStyles;
+    private List<String> cleaningPrefs;
 }

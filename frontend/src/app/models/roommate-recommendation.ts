@@ -4,4 +4,8 @@ export interface RoommateRecommendation {
   major: string;
   compatibilityPercentage: number;
   commonInterests: string[];
+  studySchedule: string | null;
+  hobbies: string[];
+  lifeStyles: string[];
+  cleaningPrefs: string[];
 }

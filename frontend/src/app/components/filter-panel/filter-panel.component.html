@@ -1,0 +1,134 @@
+<div class="filter-panel">
+
+  <!-- Header do painel -->
+  <div class="panel-header">
+    <h2 class="panel-title">
+      <span class="material-icons" aria-hidden="true">tune</span>
+      Filtros
+    </h2>
+    <button class="btn-close-panel" (click)="close.emit()" aria-label="Fechar painel de filtros">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+
+  <!-- Seções scrolláveis -->
+  <div class="panel-body">
+
+    <!-- Filtro: Curso -->
+    <div class="filter-section">
+      <label class="filter-label" for="majorSearch">Curso</label>
+      <div class="search-input-wrapper">
+        <span class="material-icons search-icon" aria-hidden="true">search</span>
+        <input
+          id="majorSearch"
+          type="text"
+          class="filter-input"
+          placeholder="Ex: Ciência da Computação"
+          [value]="local.majorSearch"
+          (input)="onMajorChange($any($event.target).value)"
+          autocomplete="off"
+          aria-label="Filtrar por curso"
+        />
+      </div>
+      <div *ngIf="availableMajors.length > 0" class="majors-chips">
+        <button
+          *ngFor="let major of visibleMajors"
+          class="chip"
+          [class.chip--active]="local.majorSearch === major"
+          (click)="onMajorChange(local.majorSearch === major ? '' : major)"
+          type="button">
+          {{ major }}
+        </button>
+        <button
+          *ngIf="!showAllMajors && hiddenMajorsCount > 0"
+          class="chip chip--more"
+          (click)="showAllMajors = true"
+          type="button">
+          +{{ hiddenMajorsCount }} mais
+        </button>
+        <button
+          *ngIf="showAllMajors && availableMajors.length > MAJORS_LIMIT"
+          class="chip chip--more"
+          (click)="showAllMajors = false"
+          type="button">
+          Ver menos
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtro: Compatibilidade mínima -->
+    <div class="filter-section">
+      <span class="filter-label">Compatibilidade mínima</span>
+      <div class="compat-options">
+        <button
+          *ngFor="let opt of compatibilityOptions"
+          class="chip"
+          [class.chip--active]="local.minCompatibility === opt.value"
+          (click)="onCompatibilityChange(opt.value)"
+          type="button">
+          {{ opt.label }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtro: Horário de Estudo -->
+    <div class="filter-section" *ngIf="availableStudySchedules.length > 0">
+      <span class="filter-label">Horário de Estudo</span>
+      <div class="chips-wrap">
+        <button
+          *ngFor="let s of availableStudySchedules"
+          class="chip chip--toggle"
+          [class.chip--active]="isSelected('studySchedules', s)"
+          (click)="toggle('studySchedules', s)"
+          type="button">
+          {{ s }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtro: Hobbies -->
+    <div class="filter-section" *ngIf="availableHobbies.length > 0">
+      <span class="filter-label">Hobbies</span>
+      <div class="chips-wrap">
+        <button
+          *ngFor="let h of availableHobbies"
+          class="chip chip--toggle"
+          [class.chip--active]="isSelected('selectedHobbies', h)"
+          (click)="toggle('selectedHobbies', h)"
+          type="button">
+          {{ h }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtro: Estilo de Vida -->
+    <div class="filter-section" *ngIf="availableLifeStyles.length > 0">
+      <span class="filter-label">Estilo de Vida</span>
+      <div class="chips-wrap">
+        <button
+          *ngFor="let l of availableLifeStyles"
+          class="chip chip--toggle"
+          [class.chip--active]="isSelected('selectedLifeStyles', l)"
+          (click)="toggle('selectedLifeStyles', l)"
+          type="button">
+          {{ l }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtro: Preferências de Limpeza -->
+    <div class="filter-section" *ngIf="availableCleaningPrefs.length > 0">
+      <span class="filter-label">Preferências de Limpeza</span>
+      <div class="chips-wrap">
+        <button
+          *ngFor="let c of availableCleaningPrefs"
+          class="chip chip--toggle"
+          [class.chip--active]="isSelected('selectedCleaningPrefs', c)"
+          (click)="toggle('selectedCleaningPrefs', c)"
+          type="button">
+          {{ c }}
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /panel-body -->

@@ -1,0 +1,339 @@
+:host {
+  display: block;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* === Panel container === */
+.filter-panel {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* scrollable middle area */
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.panel-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.panel-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.panel-body::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+/* === Header === */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1.5px solid #f3f4f6;
+  background: #f9fafb;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.panel-title .material-icons {
+  font-size: 20px;
+  color: #005fa3;
+}
+
+.btn-close-panel {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.btn-close-panel:hover {
+  color: #1a1a2e;
+  background: #e5e7eb;
+}
+
+/* === Sections === */
+.filter-section {
+  padding: 18px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-section:last-of-type {
+  border-bottom: none;
+}
+
+.filter-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+}
+
+/* === Search input === */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  font-size: 18px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 9px 12px 9px 34px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.875rem;
+  color: #1a1a2e;
+  background: #f9fafb;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #005fa3;
+  background: #fff;
+}
+
+.filter-input::placeholder {
+  color: #d1d5db;
+}
+
+/* === Chips === */
+.majors-chips,
+.compat-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 5px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 999px;
+  background: #f9fafb;
+  color: #374151;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: #005fa3;
+  color: #005fa3;
+  background: #f0f7ff;
+}
+
+.chip--active {
+  border-color: #005fa3;
+  background: #005fa3;
+  color: #fff;
+}
+
+.chip--active:hover {
+  background: #004a80;
+  border-color: #004a80;
+  color: #fff;
+}
+
+.chip--more {
+  border-style: dashed;
+  color: #005fa3;
+  background: transparent;
+}
+
+.chip--more:hover {
+  background: #f0f7ff;
+  border-color: #005fa3;
+}
+
+/* === Toggle chips (habit categories) === */
+.chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip--toggle {
+  padding: 5px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 999px;
+  background: #f9fafb;
+  color: #374151;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.chip--toggle:hover {
+  border-color: #005fa3;
+  color: #005fa3;
+  background: #f0f7ff;
+}
+
+.chip--toggle.chip--active {
+  border-color: #005fa3;
+  background: #005fa3;
+  color: #fff;
+}
+
+.chip--toggle.chip--active:hover {
+  background: #004a80;
+  border-color: #004a80;
+}
+
+/* === Interests checkboxes === */
+.interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.interests-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.interests-list::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.interests-list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.interest-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.12s;
+}
+
+.interest-checkbox:hover {
+  background: #f0f7ff;
+}
+
+.interest-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 17px;
+  height: 17px;
+  border: 2px solid #d1d5db;
+  border-radius: 5px;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.interest-checkbox--checked .checkbox-custom {
+  border-color: #005fa3;
+  background: #005fa3;
+}
+
+.interest-checkbox--checked .checkbox-custom::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.interest-text {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* === Footer === */
+.panel-footer {
+  padding: 14px 20px 18px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #f3f4f6;
+  background: #f9fafb;
+}
+
+.btn-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1.5px solid #e5e7eb;
+  color: #6b7280;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.btn-clear .material-icons {
+  font-size: 16px;
+}
+
+.btn-clear:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: #fef2f2;
+}
