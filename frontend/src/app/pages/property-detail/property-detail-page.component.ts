@@ -137,7 +137,7 @@ export class PropertyDetailPageComponent implements OnInit {
           this.hasEvaluated = true;
           this.cdr.detectChanges();
         } else if (err.status === 403) {
-          this.errorMessage = 'Apenas estudantes podem avaliar imóveis.';
+          this.errorMessage = err.error?.message ?? 'Você não tem permissão para avaliar este imóvel.';
         } else {
           this.errorMessage = 'Erro ao enviar avaliação. Tente novamente.';
         }

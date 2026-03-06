@@ -13,10 +13,12 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.roomie.dto.EvaluationRequestDTO;
 import br.edu.ufape.roomie.dto.EvaluationResponseDTO;
 import br.edu.ufape.roomie.dto.EvaluationSummaryDTO;
+import br.edu.ufape.roomie.enums.ContractStatus;
 import br.edu.ufape.roomie.model.Property;
 import br.edu.ufape.roomie.model.PropertyEvaluation;
 import br.edu.ufape.roomie.model.Student;
 import br.edu.ufape.roomie.model.User;
+import br.edu.ufape.roomie.repository.ContractRepository;
 import br.edu.ufape.roomie.repository.PropertyEvaluationRepository;
 import br.edu.ufape.roomie.repository.PropertyRepository;
 import br.edu.ufape.roomie.repository.StudentRepository;
@@ -27,13 +29,16 @@ public class EvaluationService {
     private final PropertyEvaluationRepository evaluationRepository;
     private final PropertyRepository propertyRepository;
     private final StudentRepository studentRepository;
+    private final ContractRepository contractRepository;
 
     public EvaluationService(PropertyEvaluationRepository evaluationRepository,
                              PropertyRepository propertyRepository,
-                             StudentRepository studentRepository) {
+                             StudentRepository studentRepository,
+                             ContractRepository contractRepository) {
         this.evaluationRepository = evaluationRepository;
         this.propertyRepository = propertyRepository;
         this.studentRepository = studentRepository;
+        this.contractRepository = contractRepository;
     }
 
     @Transactional
@@ -53,6 +58,14 @@ public class EvaluationService {
                     "Você não pode avaliar seu próprio imóvel.");
         }
 
+        boolean hasContract = contractRepository.existsByPropertyIdAndStudentIdAndStatusIn(
+                propertyId, student.getId(),
+                List.of(ContractStatus.ACTIVE, ContractStatus.FINISHED));
+        if (!hasContract) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "Apenas estudantes com contrato neste imóvel podem avaliá-lo.");
+        }
+
         evaluationRepository.findByPropertyIdAndStudentId(propertyId, student.getId())
                 .ifPresent(existing -> {
                     throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -63,7 +76,6 @@ public class EvaluationService {
         evaluation.setProperty(property);
         evaluation.setStudent(student);
         evaluation.setRating(dto.getRating());
-        evaluation.setComment(dto.getComment());
         evaluation.setTimestamp(LocalDateTime.now());
 
         PropertyEvaluation saved = evaluationRepository.save(evaluation);
@@ -104,7 +116,6 @@ public class EvaluationService {
                 evaluation.getStudent().getId(),
                 evaluation.getStudent().getName(),
                 evaluation.getRating(),
-                evaluation.getComment(),
                 evaluation.getTimestamp()
         );
     }

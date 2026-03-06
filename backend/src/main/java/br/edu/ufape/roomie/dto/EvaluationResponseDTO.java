@@ -13,6 +13,5 @@ public class EvaluationResponseDTO {
     private Long studentId;
     private String studentName;
     private Integer rating;
-    private String comment;
     private LocalDateTime timestamp;
 }

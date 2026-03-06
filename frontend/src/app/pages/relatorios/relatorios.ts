@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PropertyService } from '../../services/propertyService';
@@ -30,6 +30,7 @@ export class RelatoriosComponent implements OnInit {
     private readonly propertyService: PropertyService,
     private readonly studentService: StudentService,
     private readonly toast: ToastService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -46,10 +47,12 @@ export class RelatoriosComponent implements OnInit {
       next: (data) => {
         this.ranking = data;
         this.isLoadingRanking = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.toast.error('Erro ao carregar ranking de imóveis.');
         this.isLoadingRanking = false;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -59,10 +62,12 @@ export class RelatoriosComponent implements OnInit {
       next: (data) => {
         this.engajamento = data;
         this.isLoadingEngajamento = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.toast.error('Erro ao carregar engajamento de estudantes.');
         this.isLoadingEngajamento = false;
+        this.cdr.detectChanges();
       },
     });
   }

@@ -1,5 +1,17 @@
 package br.edu.ufape.roomie.seed;
 
+import java.math.BigDecimal;
+import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
 import br.edu.ufape.roomie.enums.ContractStatus;
 import br.edu.ufape.roomie.enums.PropertyStatus;
 import br.edu.ufape.roomie.enums.PropertyType;
@@ -34,17 +46,6 @@ import br.edu.ufape.roomie.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.security.SecureRandom;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 @Component
 @RequiredArgsConstructor
@@ -189,7 +190,6 @@ public class RoomieDataSeeder implements CommandLineRunner {
             evaluation.setProperty(savedProperties.get(random.nextInt(savedProperties.size())));
             evaluation.setStudent(savedStudents.get(random.nextInt(savedStudents.size())));
             evaluation.setRating(faker.number().numberBetween(1, 5));
-            evaluation.setComment(faker.lorem().sentence());
             evaluation.setTimestamp(LocalDateTime.now().minusDays(random.nextInt(365)));
             propertyEvaluationRepository.save(evaluation);
         }

@@ -14,7 +14,7 @@ export class StarRatingComponent {
   @Input() hasEvaluated = false;
   @Input() isStudent = false;
 
-  @Output() submitEvaluation = new EventEmitter<{ rating: number; comment?: string }>();
+  @Output() submitEvaluation = new EventEmitter<{ rating: number }>();
 
   hoverRating = 0;
   selectedRating = 0;

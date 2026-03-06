@@ -1,6 +1,5 @@
 export interface EvaluationRequest {
   rating: number;
-  comment?: string;
 }
 
 export interface EvaluationResponse {
@@ -9,7 +8,6 @@ export interface EvaluationResponse {
   studentId: number;
   studentName: string;
   rating: number;
-  comment?: string;
   timestamp: string;
 }
 

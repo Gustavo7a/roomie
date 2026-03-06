@@ -1,6 +1,9 @@
 package br.edu.ufape.roomie.model;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,8 +16,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -39,9 +40,6 @@ public class PropertyEvaluation {
 
     @Column(name = "nota")
     private Integer rating;
-
-    @Column(name = "comentario", columnDefinition = "TEXT")
-    private String comment;
 
     @Column(name = "data_avaliacao")
     private LocalDateTime timestamp;
