@@ -31,13 +31,15 @@
 
   <!-- Cards dos favoritos -->
   <div *ngIf="favorites.length > 0" class="favorites-grid">
-    <div *ngFor="let fav of favorites" class="favorite-card" role="button" (click)="goToDetail(fav.id)" (keydown.enter)="goToDetail(fav.id)" tabindex="0">
-      <div class="fav-info">
-        <h3>{{ fav.titulo }}</h3>
-        <span class="fav-type">{{ typeLabel(fav.tipo) }}</span>
-        <p class="fav-location">{{ fav.bairro }}, {{ fav.cidade }} / {{ fav.estado }}</p>
-        <span class="fav-price">R$ {{ fav.preco | number: '1.0-0' }}<span class="per-month">/mês</span></span>
-      </div>
+    <div *ngFor="let fav of favorites" class="favorite-card">
+      <button class="fav-navigate" (click)="goToDetail(fav.id)">
+        <div class="fav-info">
+          <h3>{{ fav.titulo }}</h3>
+          <span class="fav-type">{{ typeLabel(fav.tipo) }}</span>
+          <p class="fav-location">{{ fav.bairro }}, {{ fav.cidade }} / {{ fav.estado }}</p>
+          <span class="fav-price">R$ {{ fav.preco | number: '1.0-0' }}<span class="per-month">/mês</span></span>
+        </div>
+      </button>
       <button class="btn-remove" (click)="removeFavorite(fav.id, $event)" title="Remover dos favoritos">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ef4444"
           stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

@@ -178,6 +178,10 @@
   cursor: pointer;
   transition: background 0.15s;
   position: relative;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
 }
 
 .notif-item:last-child {
