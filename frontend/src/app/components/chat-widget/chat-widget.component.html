@@ -28,13 +28,11 @@
         <p>Nenhuma conversa ainda</p>
       </div>
 
-      <div
+      <button
+        type="button"
         class="chat-row"
         *ngFor="let chat of chats"
-        (click)="selectChat(chat)"
-        (keydown.enter)="selectChat(chat)"
-        tabindex="0"
-        role="button">
+        (click)="selectChat(chat)">
         <div class="row-avatar">
           <span class="material-icons">person</span>
         </div>
@@ -44,7 +42,7 @@
         </div>
         <span class="row-badge" *ngIf="chat.unreadCount > 0">{{ chat.unreadCount }}</span>
         <span class="material-icons row-chevron">chevron_right</span>
-      </div>
+      </button>
     </div>
 
     <div class="panel-footer">

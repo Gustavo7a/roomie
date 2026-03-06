@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { ChatWidgetService, WidgetState } from '../../services/chat-widget.service';
 import { Auth } from '../../auth/auth';
@@ -35,7 +35,7 @@ export class ChatWidgetComponent implements OnInit, OnDestroy, AfterViewChecked 
   isAuthenticated = false;
   isOnChatPage = false;
 
-  private subs = new Subscription();
+  private readonly subs = new Subscription();
   private pollInterval: ReturnType<typeof setInterval> | null = null;
   private chatPollInterval: ReturnType<typeof setInterval> | null = null;
   private shouldScroll = false;
@@ -254,8 +254,8 @@ export class ChatWidgetComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   private scrollToBottom(): void {
-    try { const el = this.msgContainer?.nativeElement; if (el) el.scrollTop = el.scrollHeight; }
-    catch (_) {}
+    const el = this.msgContainer?.nativeElement;
+    if (el) el.scrollTop = el.scrollHeight;
   }
 }
 

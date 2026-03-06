@@ -73,6 +73,7 @@
   cursor: pointer;
   position: relative;
   transition: background 0.2s;
+  background-color: #0d83d7;
   color: white;
 }
 
@@ -88,9 +89,7 @@
   position: absolute;
   top: 2px;
   right: 2px;
-  background: #e53935;
-  color: white;
-  font-size: 10px;
+  background: #c62828;
   font-weight: 700;
   min-width: 18px;
   height: 18px;

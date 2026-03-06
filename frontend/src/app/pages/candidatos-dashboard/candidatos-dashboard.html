@@ -52,21 +52,21 @@
           <span class="stat-value">{{ totalCandidatos }}</span>
           <span class="stat-label">Total</span>
         </div>
-        <div class="stat-card stat-pending" [class.active]="activeStatusFilter === InterestStatus.PENDING" (click)="setStatusFilter(InterestStatus.PENDING)" role="button" tabindex="0" (keydown.enter)="setStatusFilter(InterestStatus.PENDING)">
+        <button type="button" class="stat-card stat-pending" [class.active]="activeStatusFilter === InterestStatus.PENDING" (click)="setStatusFilter(InterestStatus.PENDING)">
           <span class="material-icons stat-icon">hourglass_empty</span>
           <span class="stat-value">{{ totalPendentes }}</span>
           <span class="stat-label">Pendentes</span>
-        </div>
-        <div class="stat-card stat-accepted" [class.active]="activeStatusFilter === InterestStatus.ACCEPTED" (click)="setStatusFilter(InterestStatus.ACCEPTED)" role="button" tabindex="0" (keydown.enter)="setStatusFilter(InterestStatus.ACCEPTED)">
+        </button>
+        <button type="button" class="stat-card stat-accepted" [class.active]="activeStatusFilter === InterestStatus.ACCEPTED" (click)="setStatusFilter(InterestStatus.ACCEPTED)">
           <span class="material-icons stat-icon">check_circle</span>
           <span class="stat-value">{{ totalAceitos }}</span>
           <span class="stat-label">Aceitos</span>
-        </div>
-        <div class="stat-card stat-rejected" [class.active]="activeStatusFilter === InterestStatus.REJECTED" (click)="setStatusFilter(InterestStatus.REJECTED)" role="button" tabindex="0" (keydown.enter)="setStatusFilter(InterestStatus.REJECTED)">
+        </button>
+        <button type="button" class="stat-card stat-rejected" [class.active]="activeStatusFilter === InterestStatus.REJECTED" (click)="setStatusFilter(InterestStatus.REJECTED)">
           <span class="material-icons stat-icon">cancel</span>
           <span class="stat-value">{{ totalRecusados }}</span>
           <span class="stat-label">Recusados</span>
-        </div>
+        </button>
       </div>
 
       <!-- ── Barra de filtros ── -->

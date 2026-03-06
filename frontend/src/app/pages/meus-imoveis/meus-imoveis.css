@@ -529,10 +529,10 @@
   align-items: center;
   gap: 4px;
   padding: 7px 16px;
-  border: 1.5px solid #0D83D7;
+  border: 1.5px solid #0060b0;
   border-radius: 8px;
   background: #fff;
-  color: #0D83D7;
+  color: #0060b0;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -544,7 +544,7 @@
 
 .btn-candidates:hover,
 .btn-candidates.active {
-  background: #0D83D7;
+  background: #0060b0;
   color: #fff;
 }
 

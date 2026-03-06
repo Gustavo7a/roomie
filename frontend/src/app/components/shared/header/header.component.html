@@ -33,7 +33,9 @@
             *ngFor="let notif of notifications"
             class="notif-item"
             [class.notif-unread]="!notif.read"
+            tabindex="0"
             (click)="markAsRead(notif)"
+            (keydown.enter)="markAsRead(notif)"
           >
             <span class="material-icons notif-icon">{{ notif.read ? 'notifications_none' : 'notifications_active' }}</span>
             <div class="notif-content">

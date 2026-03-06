@@ -1,5 +1,5 @@
-<div class="modal-overlay" (click)="close()">
-  <div class="modal-card" (click)="$event.stopPropagation()">
+<div class="modal-overlay" (click)="close()" (keydown.escape)="close()">
+  <div class="modal-card" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
     <div class="modal-header">
       <span class="material-icons">description</span>
       <h2>Proposta de Contrato</h2>

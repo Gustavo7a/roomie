@@ -47,7 +47,7 @@ export class PropertyDetailPageComponent implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = Number(idParam);
 
-    if (!idParam || isNaN(id)) {
+    if (!idParam || Number.isNaN(id)) {
       this.errorMessage = 'ID de imóvel inválido.';
       this.isLoading = false;
       this.cdr.detectChanges();

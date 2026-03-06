@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { interval, Subscription } from 'rxjs';
+import { interval, Subscription, take } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ChatService } from '../../../services/chat.service';
 import { ContractService } from '../../../services/contract.service';
@@ -23,7 +23,6 @@ import { Property } from '../../../models/property';
 import { HeaderComponent } from '../../../components/shared/header/header.component';
 import { ContractFormModalComponent } from '../contract-form-modal/contract-form-modal.component';
 import { ToastService } from '../../../services/toast.service';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-chat-detail',
@@ -239,10 +238,8 @@ export class ChatDetailComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   private scrollToBottom(): void {
-    try {
-      const el = this.messagesContainer?.nativeElement;
-      if (el) el.scrollTop = el.scrollHeight;
-    } catch (_) {}
+    const el = this.messagesContainer?.nativeElement;
+    if (el) el.scrollTop = el.scrollHeight;
   }
 
   goBack(): void {

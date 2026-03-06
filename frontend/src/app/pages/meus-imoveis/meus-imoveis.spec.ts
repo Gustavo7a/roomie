@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
 import { MeusImoveis } from './meus-imoveis';
@@ -15,7 +15,6 @@ describe('MeusImoveis', () => {
   let component: MeusImoveis;
   let fixture: ComponentFixture<MeusImoveis>;
   let interestService: jest.Mocked<InterestService>;
-  let propertyService: jest.Mocked<PropertyService>;
   let toastService: jest.Mocked<ToastService>;
 
   const mockInterests: InterestSummary[] = [
@@ -84,7 +83,6 @@ describe('MeusImoveis', () => {
     fixture = TestBed.createComponent(MeusImoveis);
     component = fixture.componentInstance;
     interestService = TestBed.inject(InterestService) as jest.Mocked<InterestService>;
-    propertyService = TestBed.inject(PropertyService) as jest.Mocked<PropertyService>;
     toastService = TestBed.inject(ToastService) as jest.Mocked<ToastService>;
 
     await fixture.whenStable();

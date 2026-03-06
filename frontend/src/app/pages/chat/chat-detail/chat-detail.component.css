@@ -314,9 +314,9 @@
   letter-spacing: 0.4px;
 }
 
-.psc-active { background: #e8f5e9; color: #2e7d32; }
-.psc-rented { background: #fff3e0; color: #e65100; }
-.psc-draft  { background: #f5f5f5; color: #757575; }
+.psc-active { background: #e8f5e9; color: #1b5e20; }
+.psc-rented { background: #fff3e0; color: #bf360c; }
+.psc-draft  { background: #f5f5f5; color: #5a5a5a; }
 
 /* ── Contract button in sidebar ── */
 .btn-contract {
@@ -420,8 +420,8 @@
   align-self: flex-start;
 }
 
-.status-pending .contract-status-badge { background: #fff3e0; color: #e65100; }
-.status-active .contract-status-badge { background: #e8f5e9; color: #2e7d32; }
+.status-pending .contract-status-badge { background: #fff3e0; color: #bf360c; }
+.status-active .contract-status-badge { background: #e8f5e9; color: #1b5e20; }
 .status-finished .contract-status-badge { background: #eceff1; color: #455a64; }
 .status-cancelled .contract-status-badge { background: #ffebee; color: #c62828; }
 

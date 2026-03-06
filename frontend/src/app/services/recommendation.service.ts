@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, map, Observable, tap} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {RoommateRecommendation} from '../models/roommate-recommendation';
 import {environment} from '../../enviroments/enviroment';
 

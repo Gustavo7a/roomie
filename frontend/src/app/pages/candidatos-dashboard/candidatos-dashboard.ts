@@ -220,7 +220,7 @@ export class CandidatosDashboardComponent implements OnInit {
 
   filterLabel(filter: StatusFilter): string {
     if (filter === 'ALL') return 'Todos';
-    return this.interestStatusLabel(filter as InterestStatus);
+    return this.interestStatusLabel(filter);
   }
 
   readonly filterOptions: StatusFilter[] = [

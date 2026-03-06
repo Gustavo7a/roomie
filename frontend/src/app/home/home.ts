@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular
 import {PropertyService} from './property.service';
 import {PropertyList} from '../components/property-list/property-list';
 import {HeaderComponent} from '../components/shared/header/header.component';
+import {Property} from '../models/property';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ import {HeaderComponent} from '../components/shared/header/header.component';
 export class Home implements OnInit {
   hasSearched: boolean = false;
   appliedLocation: string = '';
-  properties: any[] = [];
+  properties: Property[] = [];
   isLoading: boolean = false;
   showMobileFilters: boolean = false;
   initialSearch = new FormControl('');
@@ -56,7 +57,7 @@ export class Home implements OnInit {
     const formValues = this.filterForm.value;
     this.appliedLocation = formValues.location;
 
-    const cleanParams: any = {};
+    const cleanParams: Record<string, string> = {};
     Object.keys(formValues).forEach(key => {
       if (formValues[key] !== null && formValues[key] !== '') {
         cleanParams[key] = formValues[key];
@@ -66,7 +67,7 @@ export class Home implements OnInit {
     if (!silent) this.isLoading = true;
 
     this.propertyService.buscarComFiltros(cleanParams).subscribe({
-      next: (resultados: any) => {
+      next: (resultados: Property[]) => {
         this.properties = resultados;
         this.isLoading = false;
         this.cdr.detectChanges();
