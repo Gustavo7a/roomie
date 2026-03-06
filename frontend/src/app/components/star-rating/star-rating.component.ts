@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EvaluationResponse, EvaluationSummary } from '../../models/evaluation.model';
+import { EvaluationSummary } from '../../models/evaluation.model';
 
 @Component({
   selector: 'app-star-rating',

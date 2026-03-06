@@ -5,8 +5,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { ChatWidgetService, WidgetState } from '../../services/chat-widget.service';
 import { Auth } from '../../auth/auth';

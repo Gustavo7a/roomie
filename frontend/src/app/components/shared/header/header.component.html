@@ -33,6 +33,7 @@
             *ngFor="let notif of notifications"
             class="notif-item"
             [class.notif-unread]="!notif.read"
+            role="button"
             tabindex="0"
             (click)="markAsRead(notif)"
             (keydown.enter)="markAsRead(notif)"

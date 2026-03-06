@@ -1,8 +1,7 @@
-import {HttpInterceptorFn} from '@angular/common/http';
+import {HttpInterceptorFn, HttpStatusCode} from '@angular/common/http';
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {catchError, throwError} from 'rxjs';
-import {HttpStatusCode} from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token');
